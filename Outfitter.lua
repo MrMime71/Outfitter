@@ -1376,7 +1376,7 @@ function Outfitter:UpdateCurrentOutfitIcon()
 end
 
 function Outfitter:BankFrameOpened()
-	self.BankFrameIsOpen = true
+	self.BankFrameIsOpen = false  -- removed cause bank funktion do not work: self.BankFrameIsOpen = false
 	self:BankSlotsChanged()
 end
 
@@ -1386,7 +1386,7 @@ function Outfitter:BankFrameClosed()
 end
 
 function Outfitter:VoidStorageFrameOpened()
-	self.VoidStorageIsOpen = true
+	self.VoidStorageIsOpen = False -- removed cause void funktion do not work: self.VoidStorageIsOpen = true
 end
 
 function Outfitter:VoidStorageFrameClosed()

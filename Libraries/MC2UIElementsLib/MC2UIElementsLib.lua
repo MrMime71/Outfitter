@@ -181,7 +181,7 @@ Addon.UIElementsLib._ModalDialogFrame = {}
 ----------------------------------------
 
 function Addon.UIElementsLib._ModalDialogFrame:New(pParent, pTitle, pWidth, pHeight)
-	return CreateFrame("Frame", nil, pParent)
+	return CreateFrame("Frame", nil, pParent, BackdropTemplateMixin and "BackdropTemplate" or nil) 
 end
 
 function Addon.UIElementsLib._ModalDialogFrame:Construct(pParent, pTitle, pWidth, pHeight)
@@ -1026,6 +1026,7 @@ function Addon.UIElementsLib._PlainBorderedFrame:New(pParent)
 end
 
 function Addon.UIElementsLib._PlainBorderedFrame:Construct(pParent)
+ Mixin(self, BackdropTemplateMixin)
 	self:SetBackdrop(
 	{
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
@@ -1461,7 +1462,7 @@ function Addon.UIElementsLib._DropDownMenuButton:New(parent, menuFunc, width)
 	MC2UIElementsLib_Globals.NumDropDownMenuButtons = MC2UIElementsLib_Globals.NumDropDownMenuButtons + 1
 	local name = "MC2UIElementsLib_DropDownMenuButton"..MC2UIElementsLib_Globals.NumDropDownMenuButtons
 	
-	return CreateFrame("Frame", name, parent)
+	return CreateFrame("Frame", name, parent, BackdropTemplateMixin and "BackdropTemplate" or nil)
 end
 
 function Addon.UIElementsLib._DropDownMenuButton:Construct(pParent, pMenuFunc, pWidth)
@@ -1670,6 +1671,7 @@ function Addon.UIElementsLib._Section:New(pParent, pTitle)
 end
 
 function Addon.UIElementsLib._Section:Construct(pParent, pTitle)
+Mixin(self, BackdropTemplateMixin)
 	self:SetBackdrop({
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",

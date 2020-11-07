@@ -1377,7 +1377,7 @@ end
 
 function Outfitter.OutfitBar._SettingsDialog:Construct()
 	self:SetFrameStrata("DIALOG")
-	
+		if not self.BackdropTemplateMixin then Mixin(self, BackdropTemplateMixin) end
 	self:SetBackdrop({
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
