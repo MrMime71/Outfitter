@@ -1,25 +1,17 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
-	
-	<Frame name="OutfitterDialogFrameTemplate" setAllPoints="true" virtual="true">
-		<Backdrop bgFile="Interface\Addons\Outfitter\Textures\DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<BackgroundInsets>
-				<AbsInset left="11" right="12" top="12" bottom="11"/>
-			</BackgroundInsets>
-			<TileSize>
-				<AbsValue val="32"/>
-			</TileSize>
-			<EdgeSize>
-				<AbsValue val="32"/>
-			</EdgeSize>
-		</Backdrop>
+
+	<Frame name="OutfitterDialogFrameTemplate" inherits="BackdropTemplate" setAllPoints="true" virtual="true">
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_OUTFITTER_BAR" type="global" />
+		</KeyValues>
 		<Scripts>
 			<OnShow>
 				self:SetFrameLevel(self:GetParent():GetFrameLevel())
 			</OnShow>
 		</Scripts>
 	</Frame>
-	
+
 	<Frame name="OutfitterChooseIconDialog" toplevel="true" frameStrata="DIALOG" parent="UIParent" movable="true" enableMouse="true" hidden="true">
 		<Size>
 			<AbsDimension x="340" y="415"/>
@@ -120,7 +112,7 @@
 				<FontString inherits="ChatFontNormal"/>
 			</EditBox>
 
-			<ScrollFrame name="$parentScrollFrame" inherits="ListScrollFrameTemplate">
+			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="263" y="212"/>
 				</Size>
