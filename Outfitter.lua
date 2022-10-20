@@ -22,6 +22,10 @@ Outfitter.CreditPlayersByRealm =
 -- 3 Donor
 ----------------------------------------
 {
+	[Outfitter.cDragonFlightCompatiblity] = {
+		["Nulian.. We applaude you!"] = 1,
+		["Coremeeko2"] = 1,
+	},
 	["Ace Library"] = {
 		["LibBabble"] = 2,
 		["LibBabble-Zone"] = 2,
@@ -64,6 +68,7 @@ Outfitter.CreditPlayersByRealm =
 	},
 	[Outfitter.cContributingDeveloper] =
 	{
+		["Nulian"] = 1,
 		["Dridzt"] = 1,
 		["Bruce Quinton"] = 1,
 		["Kal_Zakath13"] = 1,
@@ -4755,7 +4760,7 @@ function Outfitter:Initialize()
 			vUsedRecentNames[vName] = true
 		end
 	end
-    -- Set Item Comparison OFF 20.10.22
+    -- Set Item Comparison OFF 20.10.2022
 	if not self.Settings.Options.DisableItemComparisons then 
 		Outfitter.Settings.Options.DisableItemComparisons = true
 	end 
