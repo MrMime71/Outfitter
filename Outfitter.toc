@@ -1,4 +1,4 @@
-## Interface: 90002 
+## Interface: 100000
 ## Author: John Stephen
 ## Title: Outfitter
 ## Version: 6.0.0
@@ -8,6 +8,8 @@
 ## SavedVariablesPerCharacter: gOutfitter_Settings
 ## SavedVariables: gOutfitter_GlobalSettings
 ## X-ReloadTag: 2
+
+Compat.lua
 
 Libraries/UTF8/utf8data.lua
 Libraries/UTF8/utf8.lua
