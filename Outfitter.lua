@@ -1376,7 +1376,7 @@ function Outfitter:UpdateCurrentOutfitIcon()
 end
 
 function Outfitter:BankFrameOpened()
-	self.BankFrameIsOpen = false  -- removed cause bank funktion do not work: self.BankFrameIsOpen = false
+	self.BankFrameIsOpen = true
 	self:BankSlotsChanged()
 end
 
@@ -1385,12 +1385,16 @@ function Outfitter:BankFrameClosed()
 	self:BankSlotsChanged()
 end
 
-function Outfitter:VoidStorageFrameOpened()
-	self.VoidStorageIsOpen = False -- removed cause void funktion do not work: self.VoidStorageIsOpen = true
+function Outfitter:VoidStorageFrameOpened(type)
+	if type == 26 then
+	  self.VoidStorageIsOpen = true
+	end
 end
 
-function Outfitter:VoidStorageFrameClosed()
-	self.VoidStorageIsOpen = false
+function Outfitter:VoidStorageFrameClosed(type)
+	if type == 26 then
+	  self.VoidStorageIsOpen = false
+	end
 end
 
 function Outfitter:RegenDisabled(pEvent)
@@ -3715,8 +3719,8 @@ end
 
 function Outfitter:GetEmptyBankSlotList()
 	local vEmptyBagSlots = {}
-	
-	local vBagIndex = NUM_BAG_SLOTS + NUM_BANKBAGSLOTS
+
+	local vBagIndex = NUM_TOTAL_EQUIPPED_BAG_SLOTS + NUM_BANKBAGSLOTS
 	local vBagSlotIndex = 1
 
 	while true do
@@ -3724,8 +3728,8 @@ function Outfitter:GetEmptyBankSlotList()
 
 		if not vBagSlotInfo then
 			return vEmptyBagSlots
-		
-		elseif vBagSlotInfo.BagIndex > NUM_BAG_SLOTS
+
+		elseif vBagSlotInfo.BagIndex > NUM_TOTAL_EQUIPPED_BAG_SLOTS
 		or vBagSlotInfo.BagIndex < 0 then
 			table.insert(vEmptyBagSlots, vBagSlotInfo)
 		end
@@ -4829,10 +4833,10 @@ function Outfitter:Initialize()
 	self.EventLib:RegisterEvent("BANKFRAME_CLOSED", self.BankFrameClosed, self)
 
 	-- For monitoring void storage
-	
-	self.EventLib:RegisterEvent("VOID_STORAGE_OPEN", self.VoidStorageFrameOpened, self)
-	self.EventLib:RegisterEvent("VOID_STORAGE_CLOSE", self.VoidStorageFrameClosed, self)
-	
+
+	self.EventLib:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", self.VoidStorageFrameOpened, self)
+	self.EventLib:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", self.VoidStorageFrameClosed, self)
+
 	-- For unequipping the dining outfit
 
 	self.EventLib:RegisterEvent("UNIT_MANA", self.UnitHealthOrManaChanged, self, true) -- Register as a blind event handler (no event id param)
@@ -6420,9 +6424,9 @@ function Outfitter:DepositOtherOutfits(pOutfit)
 	end -- for
 
 	-- Build a list of items in all outfits
-	
-	local vEquipmentChangeList = {}
-	
+
+	local vEquipmentChangeList = Outfitter:New(Outfitter._EquipmentChanges)
+
 	for vCategoryID, vOutfits in pairs(self.Settings.Outfits) do
 		for vOutfitIndex, vOutfit in ipairs(vOutfits) do
 			if vOutfit ~= pOutfit then
