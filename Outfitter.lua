@@ -7269,15 +7269,18 @@ function Outfitter._ExtendedCompareTooltip:Construct()
 		end
 	end)
 
-	GameTooltip:HookScript("OnHide", function ()
-		self:HideCompareItems()
-	end)
-
-	GameTooltip:HookScript("OnTooltipSetItem", function ()
-		if not IsModifiedClick("COMPAREITEMS") then
+	if not OutfitterAPI.IsWoW1002 then
+		GameTooltip:HookScript("OnHide", function ()
 			self:HideCompareItems()
-		end
-	end)
+		end)
+
+		GameTooltip:HookScript("OnTooltipSetItem", function ()
+			if not IsModifiedClick("COMPAREITEMS") then
+				self:HideCompareItems()
+			end
+		end)
+
+	end
 
 	self.Tooltips = {}
 	self.NumTooltipsShown = 0
@@ -7326,6 +7329,7 @@ function Outfitter._ExtendedCompareTooltip:ShowCompareItem()
 	self.AnchorToTooltip = nil
 
 	for vIndex, vShoppingTooltip in ipairs(GameTooltip.shoppingTooltips) do
+		if OutfitterAPI.IsWoW1002 then Mixin(vShoppingTooltip, GameTooltipDataMixin) end
 		local _, vShoppingLink = vShoppingTooltip:GetItem()
 		local vShoppingItemInfo = Outfitter:GetItemInfoFromLink(vShoppingLink)
 
@@ -7449,6 +7453,8 @@ function Outfitter._ExtendedCompareTooltip:ShoppingItemIsShown(pItemInfo)
 			break
 		end
 
+		if OutfitterAPI.IsWoW1002 then Mixin(vTooltip, GameTooltipDataMixin) end
+
 		local _, vTooltipLink = vTooltip:GetItem()
 		local vTooltipItemInfo = Outfitter:GetItemInfoFromLink(vTooltipLink)
 
@@ -7485,6 +7491,17 @@ function Outfitter._ExtendedCompareTooltip:AddShoppingLink(pTitle, pItemName, pL
 
 	if not vTooltip then
 		vTooltip = CreateFrame("GameTooltip", "OutfitterCompareTooltip"..self.NumTooltipsShown, UIParent, "ShoppingTooltipTemplate")
+		if OutfitterAPI.IsWoW1002 then
+		  Mixin(vTooltip, GameTooltipDataMixin)
+		  vTooltip:SetScript("OnUpdate", function ()
+			  if not TooltipUtil.ShouldDoItemComparison() then
+				  self:HideCompareItems()
+			  end
+		  end)
+		  vTooltip:SetScript("OnHide", function ()
+			  self:HideCompareItems()
+		  end)
+		end
 		vTooltip:SetOwner(UIParent, "ANCHOR_NONE")
 		vTooltip:Hide()
 
