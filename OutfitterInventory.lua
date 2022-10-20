@@ -166,12 +166,12 @@ function Outfitter:ParseItemLink2(pItemLink)
 		return
 	end
 
-	local _, _, vLinkType = pItemLink:find("|H([^:]+):")
+	local _, _, vLinkType = string.find(pItemLink, "|H([^:]+):")
 	if vLinkType ~= "item" then
 		return
 	end
 
-	local vStartIndex, vEndIndex, vCodeStrings, vName = pItemLink:find("|Hitem:([^|]*)|h%[([^%]]*)%]|h")
+	local vStartIndex, vEndIndex, vCodeStrings, vName = string.find(pItemLink, "|Hitem:([^|]*)|h%[([^%]]*)%]|h")
 	-- self:DebugMessage("start %s, end %s, codes %s, name %s", tostring(vStartIndex), tostring(vEndIndex), tostring(vCodeStrings), tostring(vName))
 
 	if not vCodeStrings then
