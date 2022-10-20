@@ -9,6 +9,8 @@
 ## SavedVariables: gOutfitter_GlobalSettings
 ## X-ReloadTag: 2
 
+Compat.lua
+
 Libraries/UTF8/utf8data.lua
 Libraries/UTF8/utf8.lua
 
