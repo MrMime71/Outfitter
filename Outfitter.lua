@@ -3516,7 +3516,7 @@ function Outfitter._BagIterator:Reset(pStartIndex, pEndIndex)
 
 	if pStartIndex == pEndIndex
 	or Outfitter:GetBagType(self.BagIndex)== Outfitter.cGeneralBagType then
-		self.NumBagSlots = GetContainerNumSlots(self.BagIndex)
+		self.NumBagSlots = OutfitterAPI:GetContainerNumSlots(self.BagIndex)
 	else
 		self.NumBagSlots = 0
 	end
@@ -3535,7 +3535,7 @@ function Outfitter._BagIterator:NextSlot()
 		self.BagSlotIndex = 1
 
 		if Outfitter:GetBagType(self.BagIndex) == Outfitter.cGeneralBagType then
-			self.NumBagSlots = GetContainerNumSlots(self.BagIndex)
+			self.NumBagSlots = OutfitterAPI:GetContainerNumSlots(self.BagIndex)
 		else
 			self.NumBagSlots = 0
 		end
@@ -3650,9 +3650,9 @@ function Outfitter:GetBagType(pBagIndex)
 	if pBagIndex < 0 then
 		pBagIndex = 4 - pBagIndex
 	end
-	
-	local vItemLink = GetInventoryItemLink("player", ContainerIDToInventoryID(pBagIndex))
-	
+
+	local vItemLink = GetInventoryItemLink("player", OutfitterAPI:ContainerIDToInventoryID(pBagIndex))
+
 	if not vItemLink then
 		return nil
 	end
@@ -3679,13 +3679,14 @@ function Outfitter:GetEmptyBagSlot(pStartBagIndex, pStartBagSlotIndex, pIncludeB
 	end
 
 	for vBagIndex = vStartBagIndex, vEndBagIndex, -1 do
-		local vNumEmptySlots, vBagType = GetContainerNumFreeSlots(vBagIndex)
-		
+		local vNumEmptySlots, vBagType = OutfitterAPI:GetContainerNumFreeSlots(vBagIndex)
+
 		if vNumEmptySlots > 0 then
-			local vNumBagSlots = GetContainerNumSlots(vBagIndex)
-			
+			local vNumBagSlots = OutfitterAPI:GetContainerNumSlots(vBagIndex)
+
 			for vSlotIndex = vStartBagSlotIndex, vNumBagSlots do
-				if not GetContainerItemLink(vBagIndex, vSlotIndex) then
+				if not OutfitterAPI:GetContainerItemLink(vBagIndex, vSlotIndex) then
+
 					return {BagIndex = vBagIndex, BagSlotIndex = vSlotIndex, BagType = vBagType}
 				end
 			end
@@ -3756,8 +3757,8 @@ function Outfitter:FindItemsInBagsForSlot(pSlotName, pIgnoreItems)
 	local vNumBags, vFirstBagIndex = self:GetNumBags()
 
 	for vBagIndex = vFirstBagIndex, vNumBags do
-		local vNumBagSlots = GetContainerNumSlots(vBagIndex)
-		
+		local vNumBagSlots = OutfitterAPI:GetContainerNumSlots(vBagIndex)
+
 		if vNumBagSlots > 0 then
 			for vSlotIndex = 1, vNumBagSlots do
 				local vItemInfo = self:GetBagItemInfo(vBagIndex, vSlotIndex)
@@ -8111,7 +8112,7 @@ function Outfitter._ListItem:OnClick(button, down)
 				return
 			else
 				if self.outfitItem.Location.BagIndex then
-					UseContainerItem(self.outfitItem.Location.BagIndex, self.outfitItem.Location.BagSlotIndex)
+					OutfitterAPI:UseContainerItem(self.outfitItem.Location.BagIndex, self.outfitItem.Location.BagSlotIndex)
 					StackSplitFrame:Hide()
 				end
 			end
