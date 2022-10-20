@@ -686,7 +686,12 @@ function Outfitter._OutfitMethodsEM:UnpackLocation(pLocation)
 			vBagIndex = -1
 		end
 	end
-	
+
+    -- Increase bank bags with +1 because function gives wrong result
+	if vInBank and vBagIndex > 0 then
+		vBagIndex = vBagIndex + 1
+	end
+
 	return vOnPlayer, vInBank, vInBags, vSlotIndex, vBagIndex
 end
 
@@ -1072,4 +1077,3 @@ function Outfitter._OutfitMethodsEM:GetMissingItems(pInventoryCache)
 	
 	return vMissingItems, vBankedItems
 end
-
