@@ -20,19 +20,16 @@ Outfitter includes an icon bar for fast access to your outfits, a minimap menu f
 Outfitter can also generate outfits for you, optimized for a specific combination of stats you specify or using Pawn weights (must have Pawn installed).
 
 NOTE: This is a fan fix addon!
-DragonFlight Changes done By Nulian ( https://www.curseforge.com/members/nulian/projects)
+DragonFlight Changes done By: 
+v10.0.2
+@Nulian ( https://www.curseforge.com/members/nulian/projects)
+
 So you can use curse client to update (if needed) - Forked Due to MIT License contained in the original files.
-
+v9.x.x Changes done by
 @NokeHarrier (fix for line 184 in MC2UIElementsLib.lua
-
 @kionik  (fix for line 319 in Libdropdown-1.0.lua)
-
 @UppyDan fix for line 1380 in OutfitterBar.lua
-
 You are Gods!
-
 @me (fix for line 1464 in MC2UIElementsLib.lua)
-
-@me disabling bank/void functionality in line 1379 and 1389 in Outfitter.lua
-
+me disabling bank/void functionality in line 1379 and 1389 in Outfitter.lua
 @me added new line: Mixin (self, BackdropTemplateMixin) at Line 1673 and 1029 in MC2UIElementsLib.lua (keeping original backdrop config and create new outfit from stats)
