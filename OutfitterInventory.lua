@@ -501,7 +501,8 @@ function Outfitter:GetSlotIDItemInfo(slotID)
 end
 
 function Outfitter:GetAzeriteCodesForLocation(location)
-	if not C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItem(location) then
+	local success,isAzeriteItem  = pcall( function() return C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItem(location) end );
+	if not (success and isAzeriteItem) then
 		return
 	end
 
