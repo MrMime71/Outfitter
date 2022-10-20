@@ -435,8 +435,8 @@ function Outfitter.OutfitBar:GetCursorTexture()
 		local	vNumBags, vFirstBagIndex = Outfitter:GetNumBags()
 
 		for vBagIndex = vFirstBagIndex, vNumBags do
-			local vNumBagSlots = GetContainerNumSlots(vBagIndex)
-			
+			local vNumBagSlots = OutfitterAPI:GetContainerNumSlots(vBagIndex)
+
 			for vBagSlotIndex = 1, vNumBagSlots do
 				local vItemLink = GetContainerItemLink(vBagIndex, vBagSlotIndex)
 
@@ -1304,8 +1304,8 @@ function Outfitter.OutfitBar.TextureSets.Inventory:Activate()
 	local vNumBags, vFirstBagIndex = Outfitter:GetNumBags()
 
 	for vBagIndex = vFirstBagIndex, vNumBags do
-		local	vNumBagSlots = GetContainerNumSlots(vBagIndex)
-		
+		local	vNumBagSlots = OutfitterAPI:GetContainerNumSlots(vBagIndex)
+
 		if vNumBagSlots > 0 then
 			for vSlotIndex = 1, vNumBagSlots do
 				local vTexture = GetContainerItemInfo(vBagIndex, vSlotIndex)
