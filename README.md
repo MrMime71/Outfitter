@@ -20,6 +20,7 @@ Outfitter includes an icon bar for fast access to your outfits, a minimap menu f
 Outfitter can also generate outfits for you, optimized for a specific combination of stats you specify or using Pawn weights (must have Pawn installed).
 
 NOTE: This is a fan fix addon!
+DragonFlight Changes done By Nulian ( https://www.curseforge.com/members/nulian/projects)
 So you can use curse client to update (if needed) - Forked Due to MIT License contained in the original files.
 
 @NokeHarrier (fix for line 184 in MC2UIElementsLib.lua
