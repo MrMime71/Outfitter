@@ -56,7 +56,7 @@ function Addon.DebugLib:FindDebugFrame()
 				end
 				
 				self.DebugFrame:SetFading(false)
-				self.DebugFrame:SetMaxResize(1200, 1000)
+				self.DebugFrame:SetResizeBounds(400, 300, 1200, 1000)
 			end
 		end
 	end
