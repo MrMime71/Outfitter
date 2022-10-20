@@ -4755,7 +4755,10 @@ function Outfitter:Initialize()
 			vUsedRecentNames[vName] = true
 		end
 	end
-
+    -- Set Item Comparison OFF 20.10.22
+	if not self.Settings.Options.DisableItemComparisons then 
+		Outfitter.Settings.Options.DisableItemComparisons = true
+	end 
 	-- Set the minimap button
 
 	if self.Settings.Options.HideMinimapButton then
@@ -7263,6 +7266,8 @@ Outfitter._ExtendedCompareTooltip = {}
 ----------------------------------------
 
 function Outfitter._ExtendedCompareTooltip:Construct()
+Outfitter.Settings.Options.DisableItemComparisons = true -- force tooltip comparison off
+--[[ 
 	hooksecurefunc("GameTooltip_ShowCompareItem", function (pShift)
 		if not Outfitter.Settings.Options.DisableItemComparisons then
 			self:ShowCompareItem(pShift)
@@ -7281,7 +7286,8 @@ function Outfitter._ExtendedCompareTooltip:Construct()
 
 	self.Tooltips = {}
 	self.NumTooltipsShown = 0
-	self.MaxTooltipsShown = 5
+	self.MaxTooltipsShown = 5 
+	]]--
 end
 
 function Outfitter._ExtendedCompareTooltip:ShowCompareItem()
