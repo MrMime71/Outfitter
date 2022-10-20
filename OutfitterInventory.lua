@@ -1274,10 +1274,6 @@ function Outfitter._InventoryCache:InventorySlotContainsItem(inventorySlot, outf
 	local items = {}
 	local numItems = self:FindAllItemsOrAlt(outfitItem, nil, items)
 
-	if inventorySlot == "HeadSlot" then
-		Outfitter:DebugTable(items, "items")
-	end
-
 	if numItems == 0 then
 --		Outfitter:DebugMessage("InventorySlotContainsItem: OutfitItem not found")
 --		Outfitter:DebugTable(outfitItem, "InventorySlotContainsItem: OutfitItem")
