@@ -2887,7 +2887,7 @@ end
 function Outfitter:UpdateSlotEnables(pOutfit, pInventoryCache)
 	for _, vInventorySlot in ipairs(self.cSlotNames) do
 		local vCheckbox = _G["OutfitterEnable"..vInventorySlot]
-		
+
 		if not pOutfit:SlotIsEnabled(vInventorySlot) then
 			vCheckbox:SetChecked(false)
 		else
@@ -4603,7 +4603,7 @@ function Outfitter:SlotEnableClicked(pCheckbox, pButton)
 		pCheckbox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 		vChecked = true
 	end
-	
+
 	self:SetSlotEnable(pCheckbox.SlotName, vChecked)
 	self:OutfitSettingsChanged(self.SelectedOutfit)
 	self:Update(true)
@@ -7269,7 +7269,13 @@ Outfitter._ExtendedCompareTooltip = {}
 function Outfitter._ExtendedCompareTooltip:Construct()
 	hooksecurefunc("GameTooltip_ShowCompareItem", function (pShift)
 		if not Outfitter.Settings.Options.DisableItemComparisons then
-			self:ShowCompareItem(pShift)
+			if OutfitterAPI.IsWoW1002 then
+				if TooltipUtil.ShouldDoItemComparison() then
+					self:ShowCompareItem(pShift)
+				end
+			else
+				self:ShowCompareItem(pShift)
+			end
 		end
 	end)
 
