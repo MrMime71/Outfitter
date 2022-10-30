@@ -115,7 +115,7 @@ function Outfitter._MinimapButton:SetPositionAngle(pAngle)
 	
 	--
 	
-	local vRadius = 80
+	local vRadius = 100
 	
 	local vCenterX = math.sin(vAngle) * vRadius
 	local vCenterY = math.cos(vAngle) * vRadius
