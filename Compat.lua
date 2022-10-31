@@ -9,7 +9,13 @@ function API:GetContainerItemLink(...)
 end
 
 function API:GetContainerItemInfo(...)
-    if C_Container and C_Container.GetContainerItemInfo then return C_Container.GetContainerItemInfo(...) end
+    if C_Container and C_Container.GetContainerItemInfo then
+        local containerInfo = C_Container.GetContainerItemInfo(...)
+        if containerInfo then
+            return containerInfo.iconFileID
+        end
+        return
+    end
   return GetContainerItemInfo(...)
 end
 

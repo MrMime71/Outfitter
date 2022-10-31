@@ -1,13 +1,3 @@
-BACKDROP_OUTFITTER_BAR_DIALOG = {
-	bgFile = "Interface\\Addons\\Outfitter\\Textures\\DialogBox-Background",
-	edgeFile ="Interface\\DialogFrame\\UI-DialogBox-Border",
-	tile = true,
-	tileEdge = true,
-	tileSize = 32,
-	edgeSize = 32,
-	insets = { left = 11, right = 12, top = 12, bottom = 11 },
-};
-
 ----------------------------------------
 Outfitter.OutfitBar = {}
 ----------------------------------------
@@ -438,10 +428,10 @@ function Outfitter.OutfitBar:GetCursorTexture()
 			local vNumBagSlots = OutfitterAPI:GetContainerNumSlots(vBagIndex)
 
 			for vBagSlotIndex = 1, vNumBagSlots do
-				local vItemLink = GetContainerItemLink(vBagIndex, vBagSlotIndex)
+				local vItemLink = OutfitterAPI:GetContainerItemLink(vBagIndex, vBagSlotIndex)
 
 				if vItemLink == vParam2 then
-					local vTexture = GetContainerItemInfo(vBagIndex, vBagSlotIndex)
+					local vTexture = OutfitterAPI:GetContainerItemInfo(vBagIndex, vBagSlotIndex)
 
 					return vTexture
 				end
@@ -904,6 +894,17 @@ function Outfitter.OutfitBar._ChooseIconDialog:Construct()
 		end
 	end)
 
+	local info = {
+		bgFile = "Interface\\Addons\\Outfitter\\Textures\\DialogBox-Background",
+		edgeFile ="Interface\\DialogFrame\\UI-DialogBox-Border",
+		tile = true,
+		tileEdge = true,
+		tileSize = 512,
+		edgeSize = 32,
+		insets = { left = 11, right = 12, top = 12, bottom = 11 },
+	};
+	self:SetBackdrop(info)
+
 	-- Icon sets
 	self.iconSets = {
 		{id = "Recommend", name = Outfitter.cSuggestedIcons},
@@ -1287,15 +1288,11 @@ function Outfitter.OutfitBar.TextureSets.Inventory:Activate()
 
 	for _, vInventorySlot in ipairs(Outfitter.cSlotNames) do
 		local	vSlotID = Outfitter.cSlotIDs[vInventorySlot]
-		local	vItemLink = Outfitter:GetInventorySlotIDLink(vSlotID)
+		local vTexture = GetInventoryItemTexture("player", vSlotID)
 
-		if vItemLink == vParam2 then
-			local vTexture = GetInventoryItemTexture("player", vSlotID)
-
-			if vTexture and not vUsedTextures[vTexture] then
-				table.insert(self.TextureList, vTexture)
-				vUsedTextures[vTexture] = true
-			end
+		if vTexture and not vUsedTextures[vTexture] then
+			table.insert(self.TextureList, vTexture)
+			vUsedTextures[vTexture] = true
 		end
 	end
 
@@ -1305,11 +1302,9 @@ function Outfitter.OutfitBar.TextureSets.Inventory:Activate()
 
 	for vBagIndex = vFirstBagIndex, vNumBags do
 		local	vNumBagSlots = OutfitterAPI:GetContainerNumSlots(vBagIndex)
-
 		if vNumBagSlots > 0 then
 			for vSlotIndex = 1, vNumBagSlots do
-				local vTexture = GetContainerItemInfo(vBagIndex, vSlotIndex)
-
+				local vTexture = OutfitterAPI:GetContainerItemInfo(vBagIndex, vSlotIndex)
 				if vTexture and not vUsedTextures[vTexture] then
 					table.insert(self.TextureList, vTexture)
 					vUsedTextures[vTexture] = true
