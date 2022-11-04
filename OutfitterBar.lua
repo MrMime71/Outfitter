@@ -698,8 +698,8 @@ Outfitter.OutfitBar._Button.Widgets =
 }
 
 function Outfitter.OutfitBar._Button:Construct()
-	self:SetWidth(Outfitter.Style.ButtonBar.ButtonWidth)
-	self:SetHeight(Outfitter.Style.ButtonBar.ButtonHeight)
+	self:SetWidth(Outfitter.Style.ButtonBar.ButtonWidth + 10)
+	self:SetHeight(Outfitter.Style.ButtonBar.ButtonHeight + 10)
 
 	self:SetScript("OnClick", function (button, ...) button:OnClick(...) end)
 	self:SetScript("OnEnter", function (button, ...) button:OnEnter(...) end)

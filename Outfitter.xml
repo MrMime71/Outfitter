@@ -628,9 +628,7 @@
 				<Frames>
 					<Button name="OutfitterCloseButton" inherits="UIPanelCloseButton">
 						<Anchors>
-							<Anchor point="TOPRIGHT">
-								<Offset x="5" y="5"/>
-							</Anchor>
+							<Anchor point="TOPRIGHT" />
 						</Anchors>
 					</Button>
 					<Frame name="OutfitterMainFrame" hidden="true" setAllPoints="true">
