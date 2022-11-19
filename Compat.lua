@@ -44,6 +44,11 @@ function API:PickupContainerItem(...)
   return PickupContainerItem(...)
 end
 
+function API:ShowContainerSellCursor(...)
+    if C_Container and C_Container.ShowContainerSellCursor then return C_Container.ShowContainerSellCursor(...) end
+  return ShowContainerSellCursor(...)
+end
+
 function API:GetNumTrackingTypes(...)
     if C_Minimap and C_Minimap.GetNumTrackingTypes then return C_Minimap.GetNumTrackingTypes(...) end
     return GetNumTrackingTypes(...)
