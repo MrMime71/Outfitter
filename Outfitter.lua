@@ -1789,7 +1789,7 @@ function Outfitter:UnequipItemByName(pItemName)
 	end
 
 	PickupInventoryItem(vInventoryID)
-	PickupContainerItem(vEmptyBagSlot.BagIndex, vEmptyBagSlot.BagSlotIndex)
+	OutfitterAPI:PickupContainerItem(vEmptyBagSlot.BagIndex, vEmptyBagSlot.BagSlotIndex)
 end
 
 function Outfitter:AskRebuildOutfit(pOutfit)
@@ -7245,10 +7245,10 @@ function Outfitter:PlayerIsOnQuestID(pQuestID)
 end
 
 function Outfitter:GetTrackingEnabled(pTexture)
-	local vNumTypes = GetNumTrackingTypes()
+	local vNumTypes = OutfitterAPI:GetNumTrackingTypes()
 
 	for vIndex = 1, vNumTypes do
-		local vName, vTexture, vActive = GetTrackingInfo(vIndex)
+		local vName, vTexture, vActive = OutfitterAPI:GetTrackingInfo(vIndex)
 		if vTexture == pTexture then
 			return vActive, vIndex
 		end
@@ -7258,7 +7258,7 @@ end
 function Outfitter:SetTrackingEnabled(pTexture, pEnabled)
 	local vActive, vIndex = self:GetTrackingEnabled(pTexture)
 	if vActive ~= pEnabled then
-		SetTracking(vIndex, pEnabled == true or pEnabled == 1)
+		OutfitterAPI:SetTracking(vIndex, pEnabled == true or pEnabled == 1)
 	end
 end
 
@@ -7322,7 +7322,7 @@ function Outfitter._ExtendedCompareTooltip:ShowCompareItem()
 	      vTooltipItemCount,
 	      vTooltipItemInvType = GetItemInfo(vTooltipItemCodes[1])
 
-	if not vTooltipItemInvType then
+	if not vTooltipItemInvType or vTooltipItemType ~= "Armor" then
 		return
 	end
 
@@ -8201,7 +8201,7 @@ function Outfitter._ListItem:OnEnter()
 			GameTooltip:Show()
 		elseif MerchantFrame:IsShown() and MerchantFrame.selectedTab == 1 then
 			if self.outfitItem.Location.BagIndex then
-				ShowContainerSellCursor(self.outfitItem.Location.BagIndex, self.outfitItem.Location.BagSlotIndex)
+				OutfitterAPI:ShowContainerSellCursor(self.outfitItem.Location.BagIndex, self.outfitItem.Location.BagSlotIndex)
 			end
 		else
 			ResetCursor()

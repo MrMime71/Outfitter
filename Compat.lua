@@ -9,7 +9,13 @@ function API:GetContainerItemLink(...)
 end
 
 function API:GetContainerItemInfo(...)
-    if C_Container and C_Container.GetContainerItemInfo then return C_Container.GetContainerItemInfo(...) end
+    if C_Container and C_Container.GetContainerItemInfo then
+        local containerInfo = C_Container.GetContainerItemInfo(...)
+        if containerInfo then
+            return containerInfo.iconFileID
+        end
+        return
+    end
   return GetContainerItemInfo(...)
 end
 
@@ -36,4 +42,24 @@ end
 function API:PickupContainerItem(...)
     if C_Container and C_Container.PickupContainerItem then return C_Container.PickupContainerItem(...) end
   return PickupContainerItem(...)
+end
+
+function API:ShowContainerSellCursor(...)
+    if C_Container and C_Container.ShowContainerSellCursor then return C_Container.ShowContainerSellCursor(...) end
+  return ShowContainerSellCursor(...)
+end
+
+function API:GetNumTrackingTypes(...)
+    if C_Minimap and C_Minimap.GetNumTrackingTypes then return C_Minimap.GetNumTrackingTypes(...) end
+    return GetNumTrackingTypes(...)
+end
+
+function API:GetTrackingInfo(...)
+    if C_Minimap and C_Minimap.GetTrackingInfo then return C_Minimap.GetTrackingInfo(...) end
+    return GetTrackingInfo(...)
+end
+
+function API:SetTracking(...)
+    if C_Minimap and C_Minimap.SetTracking then return C_Minimap.SetTracking(...) end
+    return SetTracking(...)
 end

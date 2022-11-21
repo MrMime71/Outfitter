@@ -1,20 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 
-	<Frame name="OutfitterDialogFrameTemplate" inherits="BackdropTemplate" setAllPoints="true" virtual="true">
-		<KeyValues>
-			<KeyValue key="backdropInfo" value="BACKDROP_OUTFITTER_BAR" type="global" />
-		</KeyValues>
-		<Scripts>
-			<OnShow>
-				self:SetFrameLevel(self:GetParent():GetFrameLevel())
-			</OnShow>
-		</Scripts>
-	</Frame>
-
-	<Frame name="OutfitterChooseIconDialog" toplevel="true" frameStrata="DIALOG" parent="UIParent" movable="true" enableMouse="true" hidden="true">
+	<Frame name="OutfitterChooseIconDialog" toplevel="true" frameStrata="DIALOG" movable="true" parent="UIParent" enableMouse="true" hidden="true" inherits="BackdropTemplate" mixin="BackdropTemplateMixin">
 		<Size>
-			<AbsDimension x="340" y="415"/>
+			<AbsDimension x="400" y="415"/>
 		</Size>
 		<Anchors>
 			<Anchor point="CENTER">
@@ -36,14 +25,14 @@
 					</Anchors>
 				</FontString>
 			</Layer>
+
 		</Layers>
 		<Frames>
-			<Frame inherits="OutfitterDialogFrameTemplate"/>
 			<Frame name="$parentIconSetMenu" hidden="false">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT">
 						<Offset>
-							<AbsDimension x="74" y="-10"/>
+							<AbsDimension x="45" y="-10"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -112,9 +101,9 @@
 				<FontString inherits="ChatFontNormal"/>
 			</EditBox>
 
-			<ScrollFrame name="$parentScrollFrame" inherits="UIPanelScrollFrameTemplate">
+			<ScrollFrame name="$parentScrollFrame" inherits="FauxScrollFrameTemplate">
 				<Size>
-					<AbsDimension x="263" y="212"/>
+					<AbsDimension x="320" y="260"/>
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parentFilterEditBox" relativePoint="BOTTOMLEFT">
@@ -171,6 +160,9 @@
 			<OnLoad>
 				Outfitter.InitializeFrame(self, Outfitter.OutfitBar._ChooseIconDialog)
 			</OnLoad>
+			<OnShow>
+				self:SetFrameLevel(self:GetParent():GetFrameLevel())
+			</OnShow>
 			<OnMouseWheel>
 				return
 			</OnMouseWheel>
