@@ -1535,8 +1535,9 @@ end
 -- $EVENTS TRADE_SKILL_SHOW TRADE_SKILL_CLOSE
 
 if event == "TRADE_SKILL_SHOW" then
-    local skillLineID, _, _, _, _, skillLineID2 = C_TradeSkillUI.GetTradeSkillLine()
-    if skillLineID == 185 or skillLineID2 == 185 then
+    local professionInfo = C_TradeSkillUI.GetBaseProfessionInfo()
+
+    if professionInfo.professionID == 185 then
         equip = true
     end
 elseif event == "TRADE_SKILL_CLOSE" then
@@ -1544,8 +1545,9 @@ elseif event == "TRADE_SKILL_CLOSE" then
         equip = false
     end
 elseif event == "TRADE_SKILL_UPDATE" then
-    local skillLineID, _, _, _, _, skillLineID2 = C_TradeSkillUI.GetTradeSkillLine()
-    if skillLineID == 185 or skillLineID2 == 185 then
+    local professionInfo = C_TradeSkillUI.GetBaseProfessionInfo()
+
+    if professionInfo.professionID == 185 then
         equip = true
     elseif didEquip then
         equip = false
