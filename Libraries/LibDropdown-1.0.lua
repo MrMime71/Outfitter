@@ -110,7 +110,7 @@ local function InitializeFrame(frame, parent)
 		end
 	end
 	
-	if not parent
+	if not parent then
 		frame:SetScale(GameTooltip:GetScale())
 	end
 end
