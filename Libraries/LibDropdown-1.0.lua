@@ -92,7 +92,7 @@ end
 new, del = lib.new, lib.del
 
 -- Make the frame match the tooltip
-local function InitializeFrame(frame)
+local function InitializeFrame(frame, parent)
 	if TooltipBackdropTemplateMixin then
 		frame.layoutType = GameTooltip.layoutType
 		if GameTooltip.layoutType then
@@ -109,7 +109,10 @@ local function InitializeFrame(frame)
 			frame:SetBackdropBorderColor(GameTooltip:GetBackdropBorderColor())
 		end
 	end
-	frame:SetScale(GameTooltip:GetScale())
+	
+	if not parent
+		frame:SetScale(GameTooltip:GetScale())
+	end
 end
 
 local editBoxCount = 1
@@ -622,7 +625,7 @@ end
 
 function AcquireFrame(parent, toplevel)
 	local f = tremove(framePool) or NewDropdownFrame()
-	InitializeFrame(f) -- set the look of the frame
+	InitializeFrame(f, parent) -- set the look of the frame
 	f.released = false
 	f.buttons = f.buttons or {}
 	f:SetParent(parent or UIParent)
