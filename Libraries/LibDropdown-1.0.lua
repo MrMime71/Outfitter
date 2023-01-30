@@ -110,6 +110,7 @@ local function InitializeFrame(frame)
 		end
 	end
 	frame:SetScale(GameTooltip:GetScale())
+	frame:SetIgnoreParentScale(true);
 end
 
 local editBoxCount = 1
