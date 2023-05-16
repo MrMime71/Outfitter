@@ -1,12 +1,14 @@
-## Interface: 100005
+## Interface: 100100
 ## Author: John Stephen
 ## Title: Outfitter
-## Version: 10.0.5.1
+## Version: 10.1.0.0
 ## Notes: Clothing and weapon management and automated equipment changes
-## OptionalDeps: 
-## RequiredDeps: 
+## OptionalDeps:
+## RequiredDeps:
 ## SavedVariablesPerCharacter: gOutfitter_Settings
 ## SavedVariables: gOutfitter_GlobalSettings
+## IconTexture: Interface\Icons\INV_Chest_Cloth_21
+## AddonCompartmentFunc: Outfitter_OnAddonCompartmentClick
 ## X-ReloadTag: 2
 
 Compat.lua
